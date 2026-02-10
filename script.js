@@ -15,11 +15,13 @@ function rajinput(){
         return;
     }
 
-    setLi(input);
-    mylist.push(input);
+    
+    mylist.push(input); //adding input data in mylist array by push function
+    setLi(input);  //input data storing in LIST tag created in unordered list of HTML
+    storeInLocalStorage(); //input data will storing in local storage
     console.log(mylist);
 
-    text.value = "";
+    text.value = ""; //text field again blank 
     //console.log(input);
 }
 
@@ -28,7 +30,11 @@ function setLi(input1)
     let li1=document.createElement("LI");
     li1.textContent=input1;
     unorderlist.appendChild(li1);
-    
+}
+
+function storeInLocalStorage()
+{
+    localStorage.setItem("arr",JSON.stringify(mylist))
 }
 
 
