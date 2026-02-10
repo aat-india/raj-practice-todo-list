@@ -1,5 +1,5 @@
 //raj todolist script file
-let arr=[]
+const mylist = []
 
 const btn=document.getElementById("btn1");
 const text=document.getElementById("text1");
@@ -12,9 +12,14 @@ function rajinput(){
     let input=text.value;
     if(!input){
         alert("ERROR : No input");
+        return;
     }
 
     setLi(input);
+    mylist.push(input);
+    console.log(mylist);
+
+    text.value = "";
     //console.log(input);
 }
 
@@ -23,6 +28,7 @@ function setLi(input1)
     let li1=document.createElement("LI");
     li1.textContent=input1;
     unorderlist.appendChild(li1);
+    
 }
 
 
