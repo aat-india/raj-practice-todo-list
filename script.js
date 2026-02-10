@@ -50,8 +50,16 @@ function getOldList(){
     
 }
 
+//printing OldList at starting when we refresh or close the browser this oldList must be shown as previously shown its a illusion
+function showOldList(){
+    for(let i=0; i<mylist.length;i++)
+    {
+        setLi(mylist[i]);
+    }
+}
 
 getOldList();
+showOldList();
 
 
 
