@@ -37,7 +37,21 @@ function storeInLocalStorage()
     localStorage.setItem("arr",JSON.stringify(mylist))
 }
 
+function getOldList(){
+    const oldList = JSON.parse(localStorage.getItem("arr")); //getting old data from local storage
+    if(oldList){
 
+        for(let i=0;i<oldList.length;i++)
+        {
+            mylist.push(oldList[i]);  //ASSIGN oldList data to myList array
+        }
+    }
+    //console.log("old list : ",mylist);  //testing old list data are assigned to myList
+    
+}
+
+
+getOldList();
 
 
 
