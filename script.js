@@ -37,6 +37,9 @@ function createNewLiElement(userInput, index)
     let deleteButton = document.createElement("BUTTON");
     deleteButton.textContent = "X";
 
+    deleteButton.addEventListener("click", function(){
+        deleteElement(index);
+    });
 
     let div = document.createElement("DIV");
     div.appendChild(label);
@@ -49,6 +52,14 @@ function createNewLiElement(userInput, index)
 
     li1.appendChild(div);
     unorderlist.appendChild(li1);
+}
+
+function deleteElement(index){
+    mylist.splice(index, 1);
+    console.log("testing splice in my list ", mylist);
+    storeInLocalStorage();  //delete element from local storage
+    unorderlist.innerHTML = ""; //unordered list old data becomes null
+    showOldList();  //new updated list is shown after deleting element
 }
 
 function storeInLocalStorage()
