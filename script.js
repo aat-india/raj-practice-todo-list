@@ -9,15 +9,17 @@ btn.addEventListener('click', rajinput);
 let index=-1;
 function rajinput(){
     //console.log("button addEventListner activated!!!!!!!");
-    let input=text.value;
-    if(!input){
+    let userinput=text.value;
+    if(!userinput){
         alert("ERROR : No input");
         return;
     }
 
-    
-    mylist.push(input); //adding input data in mylist array by push function
-    setLi(input);  //input data storing in LIST tag created in unordered list of HTML
+
+    mylist.push(userinput); //adding input data in mylist array by push function
+    index=mylist.length-1;
+    //show data to user
+    createNewLiElement(userinput, index);  //input data storing in LIST tag created in unordered list of HTML
     storeInLocalStorage(); //input data will storing in local storage
     console.log(mylist);
 
@@ -25,10 +27,27 @@ function rajinput(){
     //console.log(input);
 }
 
-function setLi(input1)
+function createNewLiElement(userInput, index)
 {
     let li1=document.createElement("LI");
-    li1.textContent=input1;
+    //creating label to show user input content
+    let label = document.createElement("LABEL");
+    label.textContent = userInput;
+    //create delete button
+    let deleteButton = document.createElement("BUTTON");
+    deleteButton.textContent = "X";
+
+
+    let div = document.createElement("DIV");
+    div.appendChild(label);
+    div.appendChild(deleteButton);
+    div.style.width = "150px";
+    div.style.display = "flex";
+    div.style.justifyContent = "space-between";
+    div.style.marginBottom = "20px";
+   
+
+    li1.appendChild(div);
     unorderlist.appendChild(li1);
 }
 
@@ -54,7 +73,7 @@ function getOldList(){
 function showOldList(){
     for(let i=0; i<mylist.length;i++)
     {
-        setLi(mylist[i]);
+        createNewLiElement(mylist[i]);
     }
 }
 
