@@ -54,9 +54,12 @@ function createNewLiElement(userInput, index)
     unorderlist.appendChild(li1);
 }
 
-function deleteElement(index){
+function deleteItemFromList(mylist, index){
     mylist.splice(index, 1);
-    console.log("testing splice in my list ", mylist);
+    //console.log("testing splice in my list ", mylist);
+}
+function deleteElement(index){
+    deleteItemFromList(mylist, index)
     storeInLocalStorage();  //delete element from local storage
     unorderlist.innerHTML = ""; //unordered list old data becomes null
     showOldList();  //new updated list is shown after deleting element
