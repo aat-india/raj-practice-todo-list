@@ -1,57 +1,96 @@
 //raj todolist script file
 const mylist = []
+let tempIndex = -1;
+let tempValue = "";
 
 const btn=document.getElementById("btn1");
-const text=document.getElementById("text1");
+const input=document.getElementById("text1");
 const unorderlist=document.getElementById("unorderlist1");
+const updateBtn = document.getElementById("updateBtn");
 
 btn.addEventListener('click', rajinput);
-let index=-1;
+
+updateBtn.addEventListener("click", function updateMyList(){
+    if(tempIndex == -1){
+        return;  //no updation
+    }
+    const updatedValue = input.value;
+    mylist[tempIndex] = updatedValue;
+    storeInLocalStorage();
+    updateDom();
+    updateBtn.style.display = "none";  
+    btn.style.display = "inline";  //active
+    input.value = "";
+    tempIndex = -1;   
+
+});
+
 function rajinput(){
     //console.log("button addEventListner activated!!!!!!!");
-    let userinput=text.value;
+    let userinput=input.value;
     if(!userinput){
         alert("ERROR : No input");
         return;
     }
 
-
     mylist.push(userinput); //adding input data in mylist array by push function
-    index=mylist.length-1;
     //show data to user
-    createNewLiElement(userinput, index);  //input data storing in LIST tag created in unordered list of HTML
+    createNewLiElement(userinput, mylist.length-1);  //input data storing in LIST tag created in unordered list of HTML
     storeInLocalStorage(); //input data will storing in local storage
-    console.log(mylist);
+    //console.log(mylist);
 
-    text.value = ""; //text field again blank 
+    input.value = ""; //input field again blank 
     //console.log(input);
 }
 
 function createNewLiElement(userInput, index)
 {
-    let li1=document.createElement("LI");
+    //console.log("demo testing INDEX VALUE  ",index)
+    let li1=document.createElement("li");
     //creating label to show user input content
-    let label = document.createElement("LABEL");
+    let label = document.createElement("label");
     label.textContent = userInput;
     //create delete button
-    let deleteButton = document.createElement("BUTTON");
+    let deleteButton = document.createElement("button");
     deleteButton.textContent = "X";
 
-    deleteButton.addEventListener("click", function(){
+    deleteButton.addEventListener("click", function (){
         deleteElement(index);
     });
 
-    let div = document.createElement("DIV");
+    let editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.addEventListener("click", function (){
+        //console.log("demo testing  ",index);
+        editMyList(index);
+       
+    });
+
+    let div = document.createElement("div");
     div.appendChild(label);
     div.appendChild(deleteButton);
+    div.appendChild(editButton);
     div.style.width = "150px";
     div.style.display = "flex";
     div.style.justifyContent = "space-between";
     div.style.marginBottom = "20px";
-   
-
+ 
     li1.appendChild(div);
     unorderlist.appendChild(li1);
+}
+
+function editMyList(index){
+        updateBtn.style.display = "inline"; //active
+        btn.style.display = "none";  //hide
+        input.value = mylist[index];
+        tempIndex = index;
+        console.log("testing index value : ",index);
+        console.log("testing value at specific position : ",mylist[index]);
+}
+
+function updateDom() {
+    mylist.innerHTML = "";
+    showOldList();
 }
 
 function deleteItemFromList(mylist, index){
@@ -85,7 +124,7 @@ function getOldList(){
 
 //printing OldList at starting when we refresh or close the browser this oldList must be shown as previously shown its a illusion
 function showOldList(){
-    for(let i=0; i<mylist.length;i++)
+    for(let i=0; i<mylist.length; i++)
     {
         createNewLiElement(mylist[i]);
     }
@@ -104,5 +143,5 @@ showOldList();
 
 
 //console.log(btn);
-//console.log(text);
+//console.log(input);
 //console.log(unorderlist);
