@@ -1,13 +1,14 @@
 
-
-body{
-    background-color: aqua;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-.header{
-    display: inline;
-}
-
-.input{
-    display: block;
+.box{
+    border: 2px solid red;
+    height: 100px;
+    width: 100px;
+    margin: 20px;
+    /*display: none;*/
+    visibility: hidden;
 }
