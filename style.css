@@ -1,0 +1,13 @@
+
+
+body{
+    background-color: aqua;
+}
+
+.header{
+    display: inline;
+}
+
+.input{
+    display: block;
+}
